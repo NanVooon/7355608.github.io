@@ -1,0 +1,68 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="zuosy" id="poetize-user-2.0.0">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user"/>
+            </not>
+        </preConditions>
+        <comment>创建user表</comment>
+        <createTable remarks="用户信息表" tableName="user">
+            <column autoIncrement="true" name="id" remarks="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="username" remarks="用户名" type="VARCHAR(32)">
+                <constraints unique="true"/>
+            </column>
+            <column name="password" remarks="密码" type="VARCHAR(128)"/>
+            <column name="phone_number" remarks="手机号" type="VARCHAR(16)"/>
+            <column name="email" remarks="用户邮箱" type="VARCHAR(32)"/>
+            <column defaultValueBoolean="true" name="user_status" remarks="是否启用[0:否，1:是]" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" remarks="性别[1:男，2:女，0:保密]" type="TINYINT(3)"/>
+            <column name="open_id" remarks="openId" type="VARCHAR(128)"/>
+            <column name="avatar" remarks="头像" type="VARCHAR(256)"/>
+            <column name="admire" remarks="赞赏" type="VARCHAR(32)"/>
+            <column name="subscribe" remarks="订阅" type="TEXT"/>
+            <column name="introduction" remarks="简介" type="VARCHAR(4096)"/>
+            <column defaultValueNumeric="2" name="user_type" remarks="用户类型[0:administrator，1:管理员，2:普通用户]" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" remarks="创建者" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="datetime"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="修改时间" type="datetime"/>
+            <column name="update_by" remarks="修改者" type="VARCHAR(32)"/>
+            <column defaultValueBoolean="false" name="deleted" remarks="是否删除[0:未删除，1:已删除]" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+
+    <changeSet id="user_init-2.0.0" author="zuosy">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(1) from user where 1=1
+            </sqlCheck>
+        </preConditions>
+        <comment>初始化oauth2_registered_client表数据</comment>
+        <insert tableName="user">
+            <column name="id" value="1" />
+            <column name="username" value="sara" />
+            <column name="password" value="$2a$10$8fyY0WbNAr980e6nLcPL5ugmpkLLH3serye5SJ3UcDForTW5b0Sx." />
+            <column name="phone_number" value="15888888888" />
+            <column name="email" value="15888888888@163.com" />
+            <column name="gender" value="1" />
+            <column name="user_type" value="0" />
+            <column name="create_by" value="sara" />
+            <column name="update_by" value="sara" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>
