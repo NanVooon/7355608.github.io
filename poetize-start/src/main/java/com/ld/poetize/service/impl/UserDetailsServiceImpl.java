@@ -34,22 +34,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     private String convertAuthor(String type){
-        String result;
-        switch (type){
-            case "0":
-                result = "administrator";
-                break;
-            case "1":
-                result = "admin";
-                break;
-            case "2":
-                result = "common";
-                break;
-            default:
-                result = "";
-                break;
-        }
-        return result;
+        return switch (type) {
+            case "0" -> "administrator";
+            case "1" -> "admin";
+            case "2" -> "common";
+            default -> "";
+        };
     }
 
 }
