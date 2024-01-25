@@ -5,7 +5,7 @@ import com.ld.poetize.authentication.password.PasswordProvider;
 import com.ld.poetize.filter.OAuth2ExceptionFilter;
 import com.ld.poetize.handler.AuthenticationEntryPointHandler;
 import com.ld.poetize.handler.MyAccessDeniedHandler;
-import com.ld.poetize.utils.BaseConstant;
+import com.ld.poetize.constants.BaseConstant;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
