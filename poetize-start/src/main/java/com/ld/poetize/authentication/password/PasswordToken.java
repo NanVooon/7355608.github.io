@@ -1,6 +1,6 @@
 package com.ld.poetize.authentication.password;
 
-import com.ld.poetize.utils.BaseConstant;
+import com.ld.poetize.constants.BaseConstant;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
