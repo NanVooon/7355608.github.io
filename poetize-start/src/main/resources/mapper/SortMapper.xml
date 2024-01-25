@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ld.poetize.mapper.SortMapper">
+
+
+	<select id="statistics" resultType="com.ld.poetize.vo.SortVO">
+		SELECT
+			s.id AS sort_id,
+			s.sort_name,
+			s.sort_description,
+			s.sort_type,
+			s.priority,
+			COUNT( a.id ) AS count_of_sort
+		FROM
+			sort s
+				LEFT JOIN article a ON s.id = a.sort_id
+		GROUP BY
+			s.id
+	</select>
+</mapper>
