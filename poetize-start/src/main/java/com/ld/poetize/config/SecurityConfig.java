@@ -2,16 +2,15 @@ package com.ld.poetize.config;
 
 import com.ld.poetize.authentication.password.PasswordConverter;
 import com.ld.poetize.authentication.password.PasswordProvider;
+import com.ld.poetize.constants.BaseConstant;
 import com.ld.poetize.filter.OAuth2ExceptionFilter;
 import com.ld.poetize.handler.AuthenticationEntryPointHandler;
 import com.ld.poetize.handler.MyAccessDeniedHandler;
-import com.ld.poetize.constants.BaseConstant;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import org.apache.catalina.util.StandardSessionIdGenerator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,8 +22,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
-import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
-import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
@@ -44,9 +41,7 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
-import java.time.Instant;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -225,11 +220,6 @@ public class SecurityConfig {
                         });
                     });
                 }
-            } else if (context.getTokenType().getValue().equals(OidcParameterNames.ID_TOKEN)) {
-                // Customize headers/claims for id_token
-                claims.claim(IdTokenClaimNames.AUTH_TIME, Date.from(Instant.now()));
-                StandardSessionIdGenerator standardSessionIdGenerator = new StandardSessionIdGenerator();
-                claims.claim("sid", standardSessionIdGenerator.generateSessionId());
             }
         };
     }
