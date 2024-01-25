@@ -44,6 +44,152 @@
         </createTable>
     </changeSet>
 
+    <changeSet author="zuo (generated)" id="poetize-article-2.0.0">
+        <createTable remarks="文章表" tableName="article">
+            <column autoIncrement="true" name="id" remarks="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="sort_id" remarks="分类ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="label_id" remarks="标签ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="article_cover" remarks="封面" type="VARCHAR(256)"/>
+            <column name="article_title" remarks="博文标题" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="article_content" remarks="博文内容" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="video_url" remarks="视频链接" type="VARCHAR(1024)"/>
+            <column defaultValueNumeric="0" name="view_count" remarks="浏览量" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="like_count" remarks="点赞数" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="view_status" remarks="是否可见[0:否，1:是]" type="TINYINT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" remarks="密码" type="VARCHAR(128)"/>
+            <column name="tips" remarks="提示" type="VARCHAR(128)"/>
+            <column defaultValueBoolean="false" name="recommend_status" remarks="是否推荐[0:否，1:是]" type="TINYINT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="comment_status" remarks="是否启用评论[0:否，1:是]" type="TINYINT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="datetime"/>
+            <column name="update_by" remarks="最终修改人" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="update_time" remarks="最终修改时间" type="datetime"/>
+            <column defaultValueBoolean="false" name="deleted" remarks="是否删除[0:未删除，1:已删除]" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="zuo (generated)" id="poetize-sort-2.0.0">
+        <createTable remarks="分类" tableName="sort">
+            <column autoIncrement="true" name="id" remarks="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="sort_name" remarks="分类名称" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sort_description" remarks="分类描述" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="1" name="sort_type" remarks="分类类型[0:导航栏分类，1:普通分类]" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="priority" remarks="导航栏分类优先级：数字小的在前面" type="INT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="zuo (generated)" id="poetize-label-2.0.0">
+        <createTable remarks="标签" tableName="label">
+            <column autoIncrement="true" name="id" remarks="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="sort_id" remarks="分类ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="label_name" remarks="标签名称" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="label_description" remarks="标签描述" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="zuo (generated)" id="poetize-comment-2.0.0">
+        <createTable remarks="文章评论表" tableName="comment">
+            <column autoIncrement="true" name="id" remarks="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="source" remarks="评论来源标识" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" remarks="评论来源类型" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="parent_comment_id" remarks="父评论ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="floor_comment_id" remarks="楼层评论ID" type="BIGINT"/>
+            <column name="parent_user_id" remarks="父发表用户名ID" type="BIGINT"/>
+            <column defaultValueNumeric="0" name="like_count" remarks="点赞数" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comment_content" remarks="评论内容" type="VARCHAR(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comment_info" remarks="评论额外信息" type="VARCHAR(256)"/>
+            <column name="create_by" remarks="创建者" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="datetime"/>
+            <column name="update_by" remarks="修改者" type="VARCHAR(64)"/>
+            <column name="update_time" remarks="修改时间" type="datetime"/>
+            <column defaultValueNumeric="0" name="deleted" remarks="是否删除" type="TINYINT(3)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="zuo (generated)" id="poetize-comment-index-2.0.0">
+        <createIndex indexName="source" tableName="comment">
+            <column name="source"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="zuo (generated)" id="poetize-web_info-2.0.0">
+        <createTable remarks="网站信息表" tableName="web_info">
+            <column autoIncrement="true" name="id" remarks="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="web_name" remarks="网站名称" type="VARCHAR(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="web_title" remarks="网站信息" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notices" remarks="公告" type="VARCHAR(512)"/>
+            <column name="footer" remarks="页脚" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="background_image" remarks="背景" type="VARCHAR(256)"/>
+            <column name="avatar" remarks="头像" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="random_avatar" remarks="随机头像" type="TEXT"/>
+            <column name="random_name" remarks="随机名称" type="VARCHAR(4096)"/>
+            <column name="random_cover" remarks="随机封面" type="TEXT"/>
+            <column name="waifu_json" remarks="看板娘消息" type="TEXT"/>
+            <column defaultValueBoolean="true" name="status" remarks="是否启用[0:否，1:是]" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 
 
     <changeSet id="user_init-2.0.0" author="zuosy">
