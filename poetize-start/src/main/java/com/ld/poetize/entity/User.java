@@ -2,7 +2,6 @@ package com.ld.poetize.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.ld.poetize.utils.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
