@@ -18,7 +18,7 @@ spring:
     oauth2:
       resource-server:
         jwt:
-          issuer-uri: http://spring-oauth-server:8080
+          issuer-uri: http://127.0.0.1:8080
   liquibase:
     enabled: true
     change-log: liquibase/changelog-master.xml
