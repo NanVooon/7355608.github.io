@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ld.poetize.mapper.ArticleMapper">
+	
+	<sql id="fields">
+		id,sort_id,label_id,article_cover,article_title,article_content,video_url,view_count,like_count,view_status,password,tips,recommend_status,comment_status,create_by,create_time,update_by,update_time,deleted
+	</sql>
+
+	<select id="pageList" resultType="com.ld.poetize.vo.ArticleVO">
+		SELECT
+			a.id,
+			a.sort_id,
+			a.label_id,
+			a.article_cover,
+			a.article_title,
+			a.article_content,
+			a.video_url,
+			a.view_count,
+			a.like_count,
+			a.view_status,
+			a.`password`,
+			a.tips,
+			a.recommend_status,
+			a.comment_status,
+			a.create_by,
+			a.create_time,
+			a.update_by,
+			a.update_time,
+			s.sort_name,
+			l.label_name
+		FROM
+			article a
+				LEFT JOIN sort s ON a.sort_id = s.id
+				LEFT JOIN label l ON a.label_id = l.id
+		<where>
+			a.deleted = 0
+			<if test="data.sortId != null">
+				AND a.sort_id = #{data.sortId}
+			</if>
+			<if test="data.labelId != null">
+				AND a.label_id = #{data.labelId}
+			</if>
+			<if test="data.recommendStatus != null">
+				AND a.recommend_status = #{data.recommendStatus}
+			</if>
+			<if test="data.articleTitle != null and data.articleTitle != ''">
+				AND a.article_title like concat('%', #{data.articleTitle}, '%')
+			</if>
+			<if test="data.articleSearch != null and data.articleSearch != ''">
+				AND a.article_title like concat('%', #{data.articleSearch}, '%')
+			</if>
+		</where>
+	</select>
+</mapper>
