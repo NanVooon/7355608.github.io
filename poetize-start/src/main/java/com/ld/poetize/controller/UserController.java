@@ -1,10 +1,16 @@
 package com.ld.poetize.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ld.poetize.dto.UserDTO;
+import com.ld.poetize.dto.UserPageDTO;
 import com.ld.poetize.service.UserService;
+import com.ld.poetize.utils.web.R;
+import com.ld.poetize.vo.UserVO;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author zuosy
@@ -17,4 +23,31 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+
+    @PostMapping("/list")
+    @Operation(summary = "用户列表")
+    @PreAuthorize("hasAuthority('SCOPE_administrator')")
+    public R<Page<UserVO>> list(@RequestBody UserPageDTO userDTO){
+        return R.okForData(userService.listPage(userDTO));
+    }
+
+    @GetMapping("/changeUserStatus")
+    @Operation(summary = "修改用户状态")
+    @PreAuthorize("hasAuthority('SCOPE_administrator')")
+    public R<Boolean> changeUserStatus(UserDTO userDTO){
+        return R.okForData(userService.changeUserStatus(userDTO));
+    }
+
+    @GetMapping("/changeUserAdmire")
+    @Operation(summary = "修改用户赞赏")
+    @PreAuthorize("hasAuthority('SCOPE_administrator')")
+    public R<Boolean> changeUserAdmire(UserDTO userDTO){
+        return R.okForData(userService.changeUserAdmire(userDTO));
+    }
+
+    @GetMapping("/getUserInfo")
+    @Operation(summary = "获取当前用户详情")
+    public R<UserVO> getUserInfo(){
+        return R.okForData(userService.getUserInfo());
+    }
 }
