@@ -1,6 +1,6 @@
 package com.ld.poetize.handler;
 
-import com.ld.poetize.utils.BaseConstant;
+import com.ld.poetize.constants.BaseConstant;
 import com.ld.poetize.utils.Oauth2Response;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

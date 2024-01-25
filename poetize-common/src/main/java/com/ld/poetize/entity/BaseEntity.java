@@ -1,4 +1,4 @@
-package com.ld.poetize.utils.entity;
+package com.ld.poetize.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
