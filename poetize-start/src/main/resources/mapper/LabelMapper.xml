@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ld.poetize.mapper.LabelMapper">
+
+
+	<select id="statistics" resultType="com.ld.poetize.vo.LabelVO">
+		SELECT
+			l.id AS label_id,
+			l.sort_id,
+			l.label_name,
+			l.label_description,
+			COUNT( a.id ) AS count_of_label
+		FROM
+			label l
+				LEFT JOIN article a ON l.id = a.label_id
+		GROUP BY
+			l.id
+	</select>
+</mapper>
