@@ -28,7 +28,12 @@ public class DefaultSecurityConfig {
     @Order(2)
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
             throws Exception {
-        http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/login").permitAll()
+        http.authorizeHttpRequests(authorize -> authorize.requestMatchers(
+                                "/login",
+                                "/v3/api-docs/**",
+                                "/doc.html",
+                                "/favicon.ico"
+                        ).permitAll()
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin.loginPage("/login"));
         http.oauth2ResourceServer((resourceServer) -> resourceServer
