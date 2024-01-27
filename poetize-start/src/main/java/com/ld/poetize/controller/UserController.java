@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -24,25 +25,32 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/list")
+    @GetMapping("/list")
     @Operation(summary = "用户列表")
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
-    public R<Page<UserVO>> list(@RequestBody UserPageDTO userDTO){
+    public R<Page<UserVO>> list(UserPageDTO userDTO){
         return R.okForData(userService.listPage(userDTO));
     }
 
-    @GetMapping("/changeUserStatus")
+    @PostMapping("/changeUserStatus")
     @Operation(summary = "修改用户状态")
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
-    public R<Boolean> changeUserStatus(UserDTO userDTO){
+    public R<Boolean> changeUserStatus(@RequestBody @Validated(UserDTO.ChangeUserStatus.class) UserDTO userDTO){
         return R.okForData(userService.changeUserStatus(userDTO));
     }
 
-    @GetMapping("/changeUserAdmire")
+    @PostMapping("/changeUserAdmire")
     @Operation(summary = "修改用户赞赏")
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
-    public R<Boolean> changeUserAdmire(UserDTO userDTO){
+    public R<Boolean> changeUserAdmire(@RequestBody @Validated(UserDTO.ChangeUserAdmire.class) UserDTO userDTO){
         return R.okForData(userService.changeUserAdmire(userDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "删除用户")
+    @PreAuthorize("hasAuthority('SCOPE_administrator')")
+    public R<Boolean> deleteUser(@PathVariable("id") Long id){
+        return R.okForData(userService.deleteUser(id));
     }
 
     @GetMapping("/getUserInfo")

@@ -39,4 +39,11 @@ public interface UserService extends IService<User> {
      * @return
      */
     UserVO getUserInfo();
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    Boolean deleteUser(Long id);
 }

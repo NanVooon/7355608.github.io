@@ -57,7 +57,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Boolean changeUserStatus(UserDTO userDTO) {
         int update = baseMapper.update(new LambdaUpdateWrapper<User>()
                 .eq(User::getId, userDTO.getUserId())
-                .set(User::getUserStatus, userDTO.getFlag()));
+                .set(User::getUserStatus, userDTO.getStatus()));
         return update > 0;
     }
 
@@ -67,6 +67,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .eq(User::getId, userDTO.getUserId())
                 .set(User::getAdmire, userDTO.getAdmire()));
         return update > 0;
+    }
+
+    @Override
+    public Boolean deleteUser(Long id) {
+        return baseMapper.deleteById(id) > 0;
     }
 
     @Override
