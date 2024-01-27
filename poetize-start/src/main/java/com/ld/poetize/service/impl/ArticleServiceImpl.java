@@ -12,6 +12,7 @@ import com.ld.poetize.service.ArticleService;
 import com.ld.poetize.vo.ArticleVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 
@@ -31,6 +32,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Override
     public Boolean saveArticle(ArticleDTO articleDTO) {
+        if (!articleDTO.getViewStatus()){
+            if (!StringUtils.hasText(articleDTO.getPassword())){
+                throw new IllegalArgumentException("文章不可见时，必须设置密码");
+            }
+        }
         Long checkTitle = baseMapper.selectCount(new LambdaQueryWrapper<Article>()
                 .eq(Article::getArticleTitle, articleDTO.getArticleTitle()));
         if (checkTitle > 0L){

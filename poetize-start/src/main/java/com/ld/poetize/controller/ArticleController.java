@@ -27,10 +27,10 @@ public class ArticleController {
 
     private final ArticleService articleService;
 
-    @PostMapping("/list")
+    @GetMapping("/list")
     @Operation(summary = "分页数据列表")
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
-    public R<Page<ArticleVO>> pageList(@RequestBody ArticlePageDTO articlePageDTO){
+    public R<Page<ArticleVO>> pageList(@Validated ArticlePageDTO articlePageDTO){
         return R.okForData(articleService.pageList(articlePageDTO));
     }
 
@@ -41,7 +41,7 @@ public class ArticleController {
         return R.okForData(articleService.saveArticle(articleDTO));
     }
 
-    @GetMapping("/getArticleById/{id}")
+    @GetMapping("/{id}")
     @Operation(summary = "文章详情")
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
     public R<ArticleVO> getArticleById(@PathVariable("id") Long id){
@@ -55,7 +55,7 @@ public class ArticleController {
         return R.okForData(articleService.updateArticle(articleDTO));
     }
 
-    @GetMapping("/deleteArticle/{id}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "删除文章")
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
     public R<Boolean> deleteArticle(@PathVariable("id") Long id){
