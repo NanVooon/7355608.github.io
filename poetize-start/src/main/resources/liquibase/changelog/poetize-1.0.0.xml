@@ -191,6 +191,26 @@
         </createTable>
     </changeSet>
 
+    <changeSet author="zuo (generated)" id="poetize-history_info-2.0.0">
+        <createTable remarks="历史信息" tableName="history_info">
+            <column autoIncrement="true" name="id" remarks="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="username" remarks="用户名" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ip" remarks="ip" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nation" remarks="国家" type="VARCHAR(64)"/>
+            <column name="province" remarks="省份" type="VARCHAR(64)"/>
+            <column name="city" remarks="城市" type="VARCHAR(64)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 
     <changeSet id="user_init-2.0.0" author="zuosy">
         <preConditions onFail="MARK_RAN">
