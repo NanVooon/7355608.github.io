@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,14 +24,14 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping("/pageList")
+    @GetMapping("/pageList")
     @Operation(summary = "分页数据列表")
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
-    public R<Page<CommentVO>> pageList(@RequestBody CommentPageDTO commentPageDTO){
+    public R<Page<CommentVO>> pageList(@Validated CommentPageDTO commentPageDTO){
         return R.okForData(commentService.pageList(commentPageDTO));
     }
 
-    @GetMapping("/deleteComment/{id}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "删除评论")
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
     public R<Boolean> deleteComment(@PathVariable("id") Long id){
