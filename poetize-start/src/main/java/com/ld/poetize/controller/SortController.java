@@ -48,10 +48,10 @@ public class SortController {
         return R.okForData(sortService.updateSort(sortDTO));
     }
 
-    @GetMapping("/deleteSort")
+    @DeleteMapping("/{id}")
     @Operation(summary = "删除分类")
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
-    public R<Boolean> deleteSort(@RequestParam("id") Long id){
+    public R<Boolean> deleteSort(@PathVariable("id") Long id){
         return R.okForData(sortService.deleteSort(id));
     }
 }
