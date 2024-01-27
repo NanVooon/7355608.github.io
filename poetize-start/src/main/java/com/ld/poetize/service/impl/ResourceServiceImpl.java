@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ld.poetize.dto.ResourceDTO;
 import com.ld.poetize.dto.ResourcePageDTO;
 import com.ld.poetize.entity.Resource;
 import com.ld.poetize.mapper.ResourceMapper;
@@ -42,7 +43,8 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     }
 
     @Override
-    public Boolean saveResource(Resource resource) {
+    public Boolean saveResource(ResourceDTO resourceDTO) {
+        Resource resource = BeanUtil.copyProperties(resourceDTO, Resource.class);
         return baseMapper.insert(resource) > 0;
     }
 

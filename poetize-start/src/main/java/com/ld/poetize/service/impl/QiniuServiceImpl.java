@@ -8,6 +8,7 @@ import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
  **/
 @Service
 @RequiredArgsConstructor
+@ConditionalOnExpression(value = "${oss.qiniu.enable:true}")
 public class QiniuServiceImpl implements QiniuService {
 
     private final UploadManager uploadManager;

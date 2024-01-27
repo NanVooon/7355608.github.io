@@ -2,6 +2,7 @@ package com.ld.poetize.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ld.poetize.dto.ResourceDTO;
 import com.ld.poetize.dto.ResourcePageDTO;
 import com.ld.poetize.entity.Resource;
 import com.ld.poetize.vo.ResourceVO;
@@ -24,7 +25,7 @@ public interface ResourceService extends IService<Resource> {
      * @param resourceDTO
      * @return
      */
-    Boolean saveResource(Resource resource);
+    Boolean saveResource(ResourceDTO resourceDTO);
 
     /**
      * 删除资源

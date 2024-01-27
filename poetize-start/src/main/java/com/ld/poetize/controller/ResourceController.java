@@ -1,23 +1,18 @@
 package com.ld.poetize.controller;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ld.poetize.dto.ResourceDTO;
 import com.ld.poetize.dto.ResourcePageDTO;
-import com.ld.poetize.entity.Resource;
-import com.ld.poetize.enums.OssType;
-import com.ld.poetize.service.MinioService;
-import com.ld.poetize.service.QiniuService;
 import com.ld.poetize.service.ResourceService;
 import com.ld.poetize.utils.web.R;
 import com.ld.poetize.vo.ResourceVO;
-import com.ld.poetize.vo.UploadVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Insert;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Author zuosy
@@ -31,10 +26,6 @@ public class ResourceController {
 
     private final ResourceService resourceService;
 
-    private final MinioService minioService;
-
-    private final QiniuService qiniuService;
-
     @GetMapping("/pageList")
     @Operation(summary = "分页数据")
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
@@ -42,26 +33,11 @@ public class ResourceController {
         return R.okForData(resourceService.pageList(resourcePageDTO));
     }
 
-    @PostMapping("/saveMinio/{type}")
+    @PostMapping("/saveResource")
     @Operation(summary = "新增资源")
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
-    public R<Boolean> saveMinio(MultipartFile file, @PathVariable("type")String type){
-        UploadVO upload = minioService.upload(file);
-        upload.setType(type);
-        upload.setStoreType(OssType.MINIO.name());
-        Resource resource = BeanUtil.copyProperties(upload, Resource.class);
-        return R.okForData(resourceService.saveResource(resource));
-    }
-
-    @PostMapping("/saveQiniu/{type}")
-    @Operation(summary = "新增资源")
-    @PreAuthorize("hasAuthority('SCOPE_administrator')")
-    public R<Boolean> saveQiniu(MultipartFile file, @PathVariable("type")String type){
-        UploadVO upload = qiniuService.upload(file);
-        upload.setType(type);
-        upload.setStoreType(OssType.QI_NIU.name());
-        Resource resource = BeanUtil.copyProperties(upload, Resource.class);
-        return R.okForData(resourceService.saveResource(resource));
+    public R<Boolean> saveMinio(@RequestBody @Validated(Insert.class)ResourceDTO resourceDTO){
+        return R.okForData(resourceService.saveResource(resourceDTO));
     }
 
     @DeleteMapping("/{id}")
