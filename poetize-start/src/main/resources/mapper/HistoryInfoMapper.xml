@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ld.poetize.mapper.HistoryInfoMapper">
+
+
+	<select id="todayStatistics" resultType="com.ld.poetize.vo.HistoryInfoVO.Child">
+		SELECT
+			province AS `key`,
+			COUNT( id ) AS `value`
+		FROM
+			history_info
+		WHERE
+				DATEDIFF(create_time,NOW()) = 0
+		GROUP BY
+			province
+	</select>
+	<select id="yesterdayStatistics" resultType="com.ld.poetize.vo.HistoryInfoVO.Child">
+		SELECT
+			province AS `key`,
+			COUNT( id ) AS `value`
+		FROM
+			history_info
+		WHERE
+			DATEDIFF(create_time,NOW()) = -1
+		GROUP BY
+			province
+	</select>
+	<select id="provinceTOP" resultType="com.ld.poetize.vo.HistoryInfoVO.Child">
+		SELECT
+			province AS `key`,
+			COUNT( id ) AS `value`
+		FROM
+			history_info
+		GROUP BY
+			province
+		LIMIT 10
+	</select>
+	<select id="ipTOP" resultType="com.ld.poetize.vo.HistoryInfoVO.Child">
+		SELECT
+			ip AS `key`,
+			COUNT( id ) AS `value`
+		FROM
+			history_info
+		GROUP BY
+			ip
+		LIMIT 10
+	</select>
+</mapper>
