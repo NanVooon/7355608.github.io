@@ -209,6 +209,35 @@
         </createTable>
     </changeSet>
 
+    <changeSet author="zuo (generated)" id="poetize-resource-2.0.0">
+        <createTable remarks="资源信息" tableName="resource">
+            <column autoIncrement="true" name="id" remarks="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="type" remarks="资源类型[0:背景图,1:表情包]" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="path" remarks="资源路径" type="VARCHAR(256)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="size" remarks="资源内容的大小，单位：字节" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="original_name" remarks="文件名称" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mime_type" remarks="资源的 MIME 类型" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="store_type" remarks="存储平台" type="VARCHAR(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 
     <changeSet id="user_init-2.0.0" author="zuosy">
         <preConditions onFail="MARK_RAN">
