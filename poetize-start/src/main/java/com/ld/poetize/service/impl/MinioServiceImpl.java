@@ -1,7 +1,8 @@
 package com.ld.poetize.service.impl;
 
-import com.ld.poetize.config.MinIoConfig;
 import com.ld.poetize.service.MinioService;
+import io.minio.BucketExistsArgs;
+import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import lombok.RequiredArgsConstructor;
@@ -22,13 +23,22 @@ public class MinioServiceImpl implements MinioService {
 
     private final MinioClient minioClient;
 
-    private final MinIoConfig minIoConfig;
-
-    @Value("${minio.bucket}")
+    @Value("${oss.minio.bucket}")
     private String bucket;
+
+    @Value("${oss.minio.endpoint}")
+    private String endpoint;
 
     @Override
     public String upload(MultipartFile file) {
+        try {
+            boolean bucketExists = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucket).build());
+            if (!bucketExists){
+                minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucket).build());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         //文件名
         String filename = file.getOriginalFilename();
         //文件流
@@ -51,6 +61,6 @@ public class MinioServiceImpl implements MinioService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return minIoConfig.getEndpoint() + "/" + bucket + "/" + filename;
+        return endpoint + "/" + bucket + "/" + filename;
     }
 }

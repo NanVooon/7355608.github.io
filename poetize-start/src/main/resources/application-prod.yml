@@ -16,3 +16,34 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
+
+#上传文件配置
+oss:
+  #minio配置
+  minio:
+    #是否开启minio
+    enable: false
+    #是否开启https
+    https: false
+    #桶
+    bucket: poetize
+    #minoi地址
+    endpoint: http://127.0.0.1:9000
+    #minio账号
+    access-key: minio
+    #minio密码
+    secret-key: minio
+  #qiniu配置
+  qiniu:
+    #是否开启七牛云
+    enable: false
+    #七牛云存储地域  例如新加坡，就配置xin_jia_po
+    address: xin_jia_po
+    #七牛云空间名
+    bucket: poetize
+    #七牛云AK
+    access-key: ak
+    #七牛云sk
+    secret-key: sk
+    #七牛云配置域名
+    download-url: http://域名/

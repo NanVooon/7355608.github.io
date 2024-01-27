@@ -32,7 +32,8 @@ public class DefaultSecurityConfig {
                                 "/login",
                                 "/v3/api-docs/**",
                                 "/doc.html",
-                                "/favicon.ico"
+                                "/favicon.ico",
+                                "/webjars/**"
                         ).permitAll()
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin.loginPage("/login"));
