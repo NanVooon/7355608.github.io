@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/test?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai&createDatabaseIfNotExist=true
-    username: root
-    password: root
+    url: jdbc:mysql://${mysql.address}:3306/poetize?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai&createDatabaseIfNotExist=true
+    username: ${mysql.username}
+    password: ${mysql.password}
   security:
     oauth2:
       resource-server:
@@ -22,7 +22,7 @@ oss:
   #minio配置
   minio:
     #是否开启minio
-    enable: false
+    enable: ${minio.enable}
     #是否开启https
     https: false
     #桶
@@ -36,7 +36,7 @@ oss:
   #qiniu配置
   qiniu:
     #是否开启七牛云
-    enable: false
+    enable: ${qiniu.enable}
     #七牛云存储地域  例如新加坡，就配置xin_jia_po
     address: xin_jia_po
     #七牛云空间名
