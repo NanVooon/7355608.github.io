@@ -32,10 +32,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Override
     public Boolean saveArticle(ArticleDTO articleDTO) {
-        if (!articleDTO.getViewStatus()){
-            if (!StringUtils.hasText(articleDTO.getPassword())){
-                throw new IllegalArgumentException("文章不可见时，必须设置密码");
-            }
+        if (articleDTO.getEncoderStatus() && !StringUtils.hasText(articleDTO.getPassword())){
+            throw new IllegalArgumentException("请设置密码");
         }
         Long checkTitle = baseMapper.selectCount(new LambdaQueryWrapper<Article>()
                 .eq(Article::getArticleTitle, articleDTO.getArticleTitle()));

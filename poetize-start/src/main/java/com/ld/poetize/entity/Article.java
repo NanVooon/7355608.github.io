@@ -65,6 +65,11 @@ public class Article extends BaseEntity {
     private Boolean viewStatus;
 
     /**
+     * 是否加密[0:否，1:是]
+     */
+    private Boolean encoderStatus;
+
+    /**
      * 浏览量
      */
     private Integer viewCount;

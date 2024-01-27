@@ -37,6 +37,9 @@ public class ArticleVO {
     @Schema(description = "是否可见")
     private Boolean viewStatus;
 
+    @Schema(description = "是否加密")
+    private Boolean encoderStatus;
+
     @Schema(description = "封面")
     private String articleCover;
 

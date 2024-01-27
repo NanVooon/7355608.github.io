@@ -69,17 +69,18 @@
             <column defaultValueNumeric="0" name="like_count" remarks="点赞数" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column defaultValueBoolean="true" name="view_status" remarks="是否可见[0:否，1:是]" type="TINYINT(1)">
+            <column name="tips" remarks="提示" type="VARCHAR(128)"/>
+            <column defaultValueBoolean="true" name="view_status" remarks="是否可见[0:否，1:是]" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="recommend_status" remarks="是否推荐[0:否，1:是]" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="comment_status" remarks="是否启用评论[0:否，1:是]" type="BIT(1)">
                 <constraints nullable="false"/>
             </column>
             <column name="password" remarks="密码" type="VARCHAR(128)"/>
-            <column name="tips" remarks="提示" type="VARCHAR(128)"/>
-            <column defaultValueBoolean="false" name="recommend_status" remarks="是否推荐[0:否，1:是]" type="TINYINT(1)">
-                <constraints nullable="false"/>
-            </column>
-            <column defaultValueBoolean="true" name="comment_status" remarks="是否启用评论[0:否，1:是]" type="TINYINT(1)">
-                <constraints nullable="false"/>
-            </column>
+            <column defaultValueBoolean="false" name="encoder_status" remarks="是否加密[0:否，1:是]" type="BIT(1)"/>
             <column name="create_by" type="VARCHAR(64)"/>
             <column defaultValueComputed="CURRENT_TIMESTAMP" name="create_time" remarks="创建时间" type="datetime"/>
             <column name="update_by" remarks="最终修改人" type="VARCHAR(64)"/>

@@ -54,6 +54,9 @@ public class ArticleDTO {
     @NotNull(message = "是否可见不能为空", groups = {Insert.class, Update.class})
     private Boolean viewStatus;
 
+    @Schema(description = "是否加密")
+    private Boolean encoderStatus;
+
     @Schema(description = "提示")
     private String tips;
 
