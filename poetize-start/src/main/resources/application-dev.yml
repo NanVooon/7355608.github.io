@@ -35,3 +35,11 @@ knife4j:
   enable: true
   setting:
     language: zh-CN
+
+#minio配置
+minio:
+  enable: true
+  bucket: poetize
+  endpoint: http://127.0.0.1:9000
+  accessKey: minio
+  secretKey: minio
