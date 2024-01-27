@@ -1,5 +1,6 @@
 package com.ld.poetize.service;
 
+import com.ld.poetize.vo.UploadVO;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -13,5 +14,5 @@ public interface MinioService {
      * @param file
      * @return
      */
-    String upload(MultipartFile file);
+    UploadVO upload(MultipartFile file);
 }

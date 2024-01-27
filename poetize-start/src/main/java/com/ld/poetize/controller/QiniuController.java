@@ -25,6 +25,6 @@ public class QiniuController {
     @PostMapping("/upload")
     @Operation(summary = "上传文件")
     public R<String> upload(MultipartFile file){
-        return R.okForData(qiniuService.upload(file));
+        return R.okForData(qiniuService.upload(file).getPath());
     }
 }

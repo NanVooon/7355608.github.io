@@ -1,5 +1,6 @@
 package com.ld.poetize.service;
 
+import com.ld.poetize.vo.UploadVO;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -8,5 +9,5 @@ import org.springframework.web.multipart.MultipartFile;
  **/
 public interface QiniuService {
 
-    String upload(MultipartFile file);
+    UploadVO upload(MultipartFile file);
 }

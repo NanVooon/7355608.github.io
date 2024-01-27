@@ -1,6 +1,7 @@
 package com.ld.poetize.service.impl;
 
 import com.ld.poetize.service.MinioService;
+import com.ld.poetize.vo.UploadVO;
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
@@ -30,7 +31,8 @@ public class MinioServiceImpl implements MinioService {
     private String endpoint;
 
     @Override
-    public String upload(MultipartFile file) {
+    public UploadVO upload(MultipartFile file) {
+        UploadVO uploadVO = new UploadVO();
         try {
             boolean bucketExists = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucket).build());
             if (!bucketExists){
@@ -61,6 +63,10 @@ public class MinioServiceImpl implements MinioService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return endpoint + "/" + bucket + "/" + filename;
+        uploadVO.setPath(endpoint + "/" + bucket + "/" + filename);
+        uploadVO.setSize(Integer.valueOf(String.valueOf(size)));
+        uploadVO.setMimeType(file.getContentType());
+        uploadVO.setOriginalName(filename);
+        return uploadVO;
     }
 }

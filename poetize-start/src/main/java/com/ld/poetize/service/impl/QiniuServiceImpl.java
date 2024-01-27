@@ -1,6 +1,7 @@
 package com.ld.poetize.service.impl;
 
 import com.ld.poetize.service.QiniuService;
+import com.ld.poetize.vo.UploadVO;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
@@ -29,7 +30,8 @@ public class QiniuServiceImpl implements QiniuService {
     private String bucket;
 
     @Override
-    public String upload(MultipartFile file) {
+    public UploadVO upload(MultipartFile file) {
+        UploadVO uploadVO = new UploadVO();
         try {
             //文件字节
             byte[] fileBytes = file.getBytes();
@@ -43,12 +45,16 @@ public class QiniuServiceImpl implements QiniuService {
             Response response = this.uploadManager.put(fileBytes, filename, uploadToken, getPutPolicy(),
                     mime, false);
             if (response.statusCode == 200) {
-                return downloadUrl+ filename;
+                uploadVO.setPath(downloadUrl+ filename);
+                uploadVO.setSize(Integer.valueOf(String.valueOf(file.getSize())));
+                uploadVO.setMimeType(file.getContentType());
+                uploadVO.setOriginalName(filename);
+                return uploadVO;
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        return uploadVO;
     }
 
     /**

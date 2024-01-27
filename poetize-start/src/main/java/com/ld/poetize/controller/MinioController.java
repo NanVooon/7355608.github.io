@@ -25,6 +25,6 @@ public class MinioController {
     @PostMapping("/upload")
     @Operation(summary = "上传文件")
     public R<String> upload(MultipartFile file){
-        return R.okForData(minioService.upload(file));
+        return R.okForData(minioService.upload(file).getPath());
     }
 }
