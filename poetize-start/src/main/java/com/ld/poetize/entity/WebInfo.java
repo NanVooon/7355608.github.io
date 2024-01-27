@@ -48,21 +48,6 @@ public class WebInfo {
     private String avatar;
 
     /**
-     * 随机头像
-     */
-    private String randomAvatar;
-
-    /**
-     * 随机名称
-     */
-    private String randomName;
-
-    /**
-     * 随机封面
-     */
-    private String randomCover;
-
-    /**
      * 看板娘消息
      */
     private String waifuJson;

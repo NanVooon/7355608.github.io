@@ -31,15 +31,6 @@ public class WebInfoVO {
     @Schema(description = "头像")
     private String avatar;
 
-    @Schema(description = "随机头像")
-    private String randomAvatar;
-
-    @Schema(description = "随机名称")
-    private String randomName;
-
-    @Schema(description = "随机封面")
-    private String randomCover;
-
     @Schema(description = "看板娘消息")
     private String waifuJson;
 

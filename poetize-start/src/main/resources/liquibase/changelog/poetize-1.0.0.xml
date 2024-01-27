@@ -181,11 +181,8 @@
             <column name="avatar" remarks="头像" type="VARCHAR(256)">
                 <constraints nullable="false"/>
             </column>
-            <column name="random_avatar" remarks="随机头像" type="TEXT"/>
-            <column name="random_name" remarks="随机名称" type="VARCHAR(4096)"/>
-            <column name="random_cover" remarks="随机封面" type="TEXT"/>
             <column name="waifu_json" remarks="看板娘消息" type="TEXT"/>
-            <column defaultValueBoolean="true" name="status" remarks="是否启用[0:否，1:是]" type="BIT(1)">
+            <column defaultValueBoolean="true" name="status" remarks="是否启用[0:否，1:是]" type="TINYINT(1)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
