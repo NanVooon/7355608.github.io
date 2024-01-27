@@ -5,7 +5,7 @@
 <mapper namespace="com.ld.poetize.mapper.HistoryInfoMapper">
 
 
-	<select id="todayStatistics" resultType="com.ld.poetize.vo.HistoryInfoVO.Child">
+	<select id="todayStatistics" resultType="com.ld.poetize.vo.HistoryInfoChildVO">
 		SELECT
 			province AS `key`,
 			COUNT( id ) AS `value`
@@ -16,7 +16,7 @@
 		GROUP BY
 			province
 	</select>
-	<select id="yesterdayStatistics" resultType="com.ld.poetize.vo.HistoryInfoVO.Child">
+	<select id="yesterdayStatistics" resultType="com.ld.poetize.vo.HistoryInfoChildVO">
 		SELECT
 			province AS `key`,
 			COUNT( id ) AS `value`
@@ -27,7 +27,7 @@
 		GROUP BY
 			province
 	</select>
-	<select id="provinceTOP" resultType="com.ld.poetize.vo.HistoryInfoVO.Child">
+	<select id="provinceTOP" resultType="com.ld.poetize.vo.HistoryInfoChildVO">
 		SELECT
 			province AS `key`,
 			COUNT( id ) AS `value`
@@ -37,7 +37,7 @@
 			province
 		LIMIT 10
 	</select>
-	<select id="ipTOP" resultType="com.ld.poetize.vo.HistoryInfoVO.Child">
+	<select id="ipTOP" resultType="com.ld.poetize.vo.HistoryInfoChildVO">
 		SELECT
 			ip AS `key`,
 			COUNT( id ) AS `value`

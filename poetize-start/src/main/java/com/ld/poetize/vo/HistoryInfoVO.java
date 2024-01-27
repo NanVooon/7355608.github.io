@@ -13,25 +13,14 @@ import java.util.List;
 public class HistoryInfoVO {
 
     @Schema(description = "今日统计")
-    private List<Child> todayStatistics;
+    private List<HistoryInfoChildVO> todayStatistics;
 
     @Schema(description = "昨日统计")
-    private List<Child> yesterdayStatistics;
+    private List<HistoryInfoChildVO> yesterdayStatistics;
 
     @Schema(description = "省访问TOP10")
-    private List<Child> provinceTOP;
+    private List<HistoryInfoChildVO> provinceTOP;
 
     @Schema(description = "IP访问TOP10")
-    private List<Child> ipTOP;
-
-
-    @Data
-    public static class Child{
-
-        @Schema(description = "key")
-        private String key;
-
-        @Schema(description = "value")
-        private String value;
-    }
+    private List<HistoryInfoChildVO> ipTOP;
 }

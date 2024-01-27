@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ld.poetize.entity.HistoryInfo;
 import com.ld.poetize.mapper.HistoryInfoMapper;
 import com.ld.poetize.service.HistoryInfoService;
+import com.ld.poetize.vo.HistoryInfoChildVO;
 import com.ld.poetize.vo.HistoryInfoVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,10 @@ public class HistoryInfoServiceImpl extends ServiceImpl<HistoryInfoMapper, Histo
     @Override
     public HistoryInfoVO getHistoryInfo() {
         HistoryInfoVO result = new HistoryInfoVO();
-        List<HistoryInfoVO.Child> todayStatistics = baseMapper.todayStatistics();
-        List<HistoryInfoVO.Child> yesterdayStatistics = baseMapper.yesterdayStatistics();
-        List<HistoryInfoVO.Child> provinceTOP = baseMapper.provinceTOP();
-        List<HistoryInfoVO.Child> ipTOP = baseMapper.ipTOP();
+        List<HistoryInfoChildVO> todayStatistics = baseMapper.todayStatistics();
+        List<HistoryInfoChildVO> yesterdayStatistics = baseMapper.yesterdayStatistics();
+        List<HistoryInfoChildVO> provinceTOP = baseMapper.provinceTOP();
+        List<HistoryInfoChildVO> ipTOP = baseMapper.ipTOP();
         result.setTodayStatistics(todayStatistics);
         result.setYesterdayStatistics(yesterdayStatistics);
         result.setProvinceTOP(provinceTOP);
