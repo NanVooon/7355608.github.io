@@ -1,7 +1,7 @@
 package com.ld.poetize.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ld.poetize.entity.User;
+import com.ld.poetize.utils.web.BaseMapper;
 import org.springframework.stereotype.Repository;
 
 /**
