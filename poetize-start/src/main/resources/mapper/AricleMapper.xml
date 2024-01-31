@@ -53,4 +53,49 @@
 			</if>
 		</where>
 	</select>
+    <select id="listSortArticle" resultType="com.ld.poetize.vo.ArticleVO">
+        SELECT
+        <include refid="fields"/>
+        FROM
+        ( SELECT *,ROW_NUMBER() OVER ( PARTITION BY sort_id ORDER BY create_time DESC ) AS row_num
+		FROM
+		article
+		WHERE
+		deleted = 0
+		AND view_status = 0
+		AND encoder_status = 0
+		) AS a
+        WHERE
+        row_num &lt; 7;
+    </select>
+	<select id="getArticleById" resultType="com.ld.poetize.vo.ArticleVO">
+		SELECT
+		a.id,
+		a.sort_id,
+		a.label_id,
+		a.article_cover,
+		a.article_title,
+		a.article_content,
+		a.video_url,
+		a.view_count,
+		a.like_count,
+		a.view_status,
+		a.`password`,
+		a.tips,
+		a.recommend_status,
+		a.comment_status,
+		a.create_by,
+		a.create_time,
+		a.update_by,
+		a.update_time,
+		s.sort_name,
+		l.label_name
+		FROM
+		article a
+		LEFT JOIN sort s ON a.sort_id = s.id
+		LEFT JOIN label l ON a.label_id = l.id
+		<where>
+			a.deleted = 0 AND a.id = #{id}
+		</where>
+	</select>
 </mapper>

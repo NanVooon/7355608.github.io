@@ -15,6 +15,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Author zuosy
  * @Date 2024/1/25 20:36
@@ -60,5 +63,26 @@ public class ArticleController {
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
     public R<Boolean> deleteArticle(@PathVariable("id") Long id){
         return R.okForData(articleService.deleteArticle(id));
+    }
+
+
+
+    /*前端页面接口*/
+    @GetMapping("/front/listArticle")
+    @Operation(summary = "首页推荐文章和搜索")
+    public R<Page<ArticleVO>> listArticle(ArticlePageDTO articlePageDTO){
+        return R.okForData(articleService.pageList(articlePageDTO));
+    }
+
+    @GetMapping("/front/listSortArticle")
+    @Operation(summary = "首页各分类获取六条")
+    public R<Map<Long, List<ArticleVO>>> listSortArticle(){
+        return R.okForData(articleService.listSortArticle());
+    }
+
+    @GetMapping("/front/{id}")
+    @Operation(summary = "首页获取文章详情")
+    public R<ArticleVO> getArticleByIdFront(@PathVariable("id") Long id){
+        return R.okForData(articleService.getArticleById(id));
     }
 }

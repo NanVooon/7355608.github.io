@@ -7,6 +7,9 @@ import com.ld.poetize.dto.ArticlePageDTO;
 import com.ld.poetize.entity.Article;
 import com.ld.poetize.vo.ArticleVO;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Author zuosy
  * @Date 2024/1/25 20:33
@@ -47,4 +50,10 @@ public interface ArticleService extends IService<Article> {
      * @return
      */
     Boolean deleteArticle(Long id);
+
+    /**
+     * 首页各分类获取六条文章
+     * @return
+     */
+    Map<Long, List<ArticleVO>> listSortArticle();
 }

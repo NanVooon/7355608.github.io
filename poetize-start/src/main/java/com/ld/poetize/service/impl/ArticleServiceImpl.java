@@ -14,7 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @Author zuosy
@@ -46,11 +49,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Override
     public ArticleVO getArticleById(Long id) {
-        Article article = baseMapper.selectById(id);
-        if (Objects.isNull(article)){
+        ArticleVO articleVO = baseMapper.getArticleById(id);
+        if (Objects.isNull(articleVO)){
             throw new IllegalArgumentException("数据异常");
         }
-        return BeanUtil.copyProperties(article, ArticleVO.class);
+        return articleVO;
     }
 
     @Override
@@ -68,5 +71,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Override
     public Boolean deleteArticle(Long id) {
         return baseMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public Map<Long, List<ArticleVO>> listSortArticle() {
+        List<ArticleVO> articleVOS = baseMapper.listSortArticle();
+        return articleVOS.stream().collect(Collectors.groupingBy(ArticleVO::getSortId));
     }
 }

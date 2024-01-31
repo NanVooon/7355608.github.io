@@ -47,4 +47,10 @@ public class WebInfoController {
     public R<LabelAndSortVO> listSortAndLabel(){
         return R.okForData(webInfoService.listSortAndLabel());
     }
+
+    @GetMapping("/front/getWebInfo")
+    @Operation(summary = "首页获取网站信息")
+    public R<WebInfoVO> getWebInfoFront(){
+        return R.okForData(webInfoService.getWebInfo());
+    }
 }

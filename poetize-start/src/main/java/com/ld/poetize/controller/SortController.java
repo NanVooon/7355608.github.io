@@ -54,4 +54,11 @@ public class SortController {
     public R<Boolean> deleteSort(@PathVariable("id") Long id){
         return R.okForData(sortService.deleteSort(id));
     }
+
+    /*前端页面接口*/
+    @GetMapping("/front/getSortInfo")
+    @Operation(summary = "首页获取所有分类")
+    public R<List<SortVO>> getSortInfo(){
+        return R.okForData(sortService.allSortList());
+    }
 }
