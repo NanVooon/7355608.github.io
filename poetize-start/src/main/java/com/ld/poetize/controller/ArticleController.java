@@ -69,9 +69,9 @@ public class ArticleController {
 
     /*前端页面接口*/
     @GetMapping("/front/listArticle")
-    @Operation(summary = "首页推荐文章和搜索")
+    @Operation(summary = "首页文章列表")
     public R<Page<ArticleVO>> listArticle(ArticlePageDTO articlePageDTO){
-        return R.okForData(articleService.pageList(articlePageDTO));
+        return R.okForData(articleService.listArticleFront(articlePageDTO));
     }
 
     @GetMapping("/front/listSortArticle")

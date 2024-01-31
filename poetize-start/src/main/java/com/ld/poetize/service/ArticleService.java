@@ -56,4 +56,11 @@ public interface ArticleService extends IService<Article> {
      * @return
      */
     Map<Long, List<ArticleVO>> listSortArticle();
+
+    /**
+     * 首页文章列表
+     * @param articlePageDTO
+     * @return
+     */
+    Page<ArticleVO> listArticleFront(ArticlePageDTO articlePageDTO);
 }

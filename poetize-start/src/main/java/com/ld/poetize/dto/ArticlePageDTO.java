@@ -27,4 +27,7 @@ public class ArticlePageDTO extends PageUtil {
 
     @Schema(description = "首页搜索框")
     private String articleSearch;
+
+    @Schema(hidden = true)
+    private Boolean viewStatus;
 }

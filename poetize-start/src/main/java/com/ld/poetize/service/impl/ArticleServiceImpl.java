@@ -78,4 +78,20 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<ArticleVO> articleVOS = baseMapper.listSortArticle();
         return articleVOS.stream().collect(Collectors.groupingBy(ArticleVO::getSortId));
     }
+
+    @Override
+    public Page<ArticleVO> listArticleFront(ArticlePageDTO articlePageDTO) {
+        //首页只展示可见文章
+        articlePageDTO.setViewStatus(true);
+        Page<Article> reqPage = Page.of(articlePageDTO.getCurrent(), articlePageDTO.getSize());
+        Page<ArticleVO> result = baseMapper.pageList(reqPage, articlePageDTO);
+        result.getRecords().forEach(article -> {
+            //如果是加密的，去除主要内容
+            if (article.getEncoderStatus()){
+                article.setPassword("");
+                article.setArticleContent("");
+            }
+        });
+        return result;
+    }
 }
