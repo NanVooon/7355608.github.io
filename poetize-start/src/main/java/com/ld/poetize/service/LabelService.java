@@ -3,6 +3,9 @@ package com.ld.poetize.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ld.poetize.dto.LabelDTO;
 import com.ld.poetize.entity.Label;
+import com.ld.poetize.vo.LabelVO;
+
+import java.util.List;
 
 /**
  * @Author zuosy
@@ -30,4 +33,11 @@ public interface LabelService extends IService<Label> {
      * @return
      */
     Boolean deleteLabel(Long id);
+
+
+    /**
+     * 获取标签列表
+     * @return
+     */
+    List<LabelVO> listLabel();
 }

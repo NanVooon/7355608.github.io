@@ -7,6 +7,8 @@ import com.ld.poetize.dto.FamilyPageDTO;
 import com.ld.poetize.entity.Family;
 import com.ld.poetize.vo.FamilyVO;
 
+import java.util.List;
+
 /**
  * @Author zuosy
  * @Date 2024/1/27 17:14
@@ -46,4 +48,11 @@ public interface FamilyService extends IService<Family> {
      * @return
      */
     Boolean deleteFamily(Long id);
+
+    /**
+     * 获取列表
+     * @return
+     */
+    List<FamilyVO> getFamilyList();
+
 }

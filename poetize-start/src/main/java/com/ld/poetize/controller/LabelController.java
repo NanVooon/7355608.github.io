@@ -3,6 +3,7 @@ package com.ld.poetize.controller;
 import com.ld.poetize.dto.LabelDTO;
 import com.ld.poetize.service.LabelService;
 import com.ld.poetize.utils.web.R;
+import com.ld.poetize.vo.LabelVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,8 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Author zuosy
@@ -43,5 +46,14 @@ public class LabelController {
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
     public R<Boolean> deleteLabel(@RequestParam("id") Long id){
         return R.okForData(labelService.deleteLabel(id));
+    }
+
+
+
+    /*前端页面接口*/
+    @GetMapping("/listLabel")
+    @Operation(summary = "获取标签列表")
+    public  R<List<LabelVO>> listLabel() {
+        return R.okForData(labelService.listLabel());
     }
 }
