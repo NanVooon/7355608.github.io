@@ -7,8 +7,11 @@ import com.ld.poetize.dto.LabelDTO;
 import com.ld.poetize.entity.Label;
 import com.ld.poetize.mapper.LabelMapper;
 import com.ld.poetize.service.LabelService;
+import com.ld.poetize.vo.LabelVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author zuosy
@@ -44,5 +47,10 @@ public class LabelServiceImpl extends ServiceImpl<LabelMapper, Label> implements
     @Override
     public Boolean deleteLabel(Long id) {
         return baseMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<LabelVO> listLabel() {
+        return baseMapper.statistics();
     }
 }

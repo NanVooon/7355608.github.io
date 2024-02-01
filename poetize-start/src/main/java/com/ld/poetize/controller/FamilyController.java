@@ -15,6 +15,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @Author zuosy
  * @Date 2024/1/27 17:15
@@ -60,5 +62,13 @@ public class FamilyController {
     @PreAuthorize("hasAuthority('SCOPE_administrator')")
     public R<Boolean> deleteFamily(@PathVariable("id") Long id){
         return R.okForData(familyService.deleteFamily(id));
+    }
+
+
+    /*前端页面接口*/
+    @GetMapping("/getFamilyList")
+    @Operation(summary = "获取family列表")
+    public R<List<FamilyVO>> getFamilyList(){
+        return R.okForData(familyService.getFamilyList());
     }
 }
