@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @Author zuosy
@@ -62,5 +64,13 @@ public class FamilyServiceImpl extends ServiceImpl<FamilyMapper, Family> impleme
     @Override
     public Boolean deleteFamily(Long id) {
         return baseMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<FamilyVO> getFamilyList() {
+        return lambdaQuery()
+                .eq(Family::getStatus, Boolean.TRUE)
+                .orderByDesc(Family::getCreateTime)
+                .list().stream().map(family -> BeanUtil.copyProperties(family, FamilyVO.class)).collect(Collectors.toList());
     }
 }
