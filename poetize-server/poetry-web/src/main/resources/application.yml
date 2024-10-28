@@ -50,10 +50,10 @@ user:
     format: your-format # 请替换为实际的格式
 
 store:
-  type: your-store-type # 请替换为实际的存储类型
+  type: aliyun # 请替换为实际的存储类型
 
 local:
-  enable: true # 根据需要设置
+  enable: false # 根据需要设置
   uploadUrl: C:/pictures/ # 请替换为实际的上传URL
   downloadUrl: C:/pictures/ # 请替换为实际的下载URL
 
@@ -66,7 +66,8 @@ local:
 
 aliyun:
   oss:
-    endpoint: oss-cn-beijing.aliyuncs.com # OSS的访问端点，这里以杭州区域为例
-    accessKeyId: LTAI5t7Uj9gnH9gmqpQn7rWb         # OSS的访问密钥ID
-    accessKeySecret: mIJ54oLaKHCsZAy8EZ2ZYE3OYF4H6u  # OSS的访问密钥密钥
-    bucketName: poetize-lpj            # OSS的存储桶名称
+    enable: true
+    endpoint: oss-cn-beijing.aliyuncs.com
+    accessKeyId: LTAI5t7Uj9gnH9gmqpQn7rWb
+    accessKeySecret: mIJ54oLaKHCsZAy8EZ2ZYE3OYF4H6u
+    bucketName: poetize-lpj
