@@ -6,7 +6,9 @@ import org.springframework.util.StringUtils;
 public enum StoreEnum {
 
     QINIU("qiniu"),
+    ALIYUN("aliyun"),
     LOCAL("local");
+
 
     private String code;
 
