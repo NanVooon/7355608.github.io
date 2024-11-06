@@ -124,8 +124,8 @@ public class AliYunOssUtil implements StoreService {
 
             // 构建返回结果
             FileVO result = new FileVO();
-            result.setAbsolutePath("https://"+bucketName+"."+downloadUrl + "/" + path);
-            result.setVisitPath("https://"+bucketName+"."+downloadUrl + "/" + path);
+            result.setAbsolutePath(downloadUrl + path);
+            result.setVisitPath(downloadUrl + path);
             return result;
         } catch (IOException e) {
             log.error("文件上传失败：", e);

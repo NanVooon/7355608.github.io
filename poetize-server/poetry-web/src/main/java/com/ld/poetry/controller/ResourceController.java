@@ -70,7 +70,7 @@ public class ResourceController {
         if (file == null || !StringUtils.hasText(fileVO.getType()) || !StringUtils.hasText(fileVO.getRelativePath())) {
             return PoetryResult.fail("文件和资源类型和资源路径不能为空！");
         }
-        fileVO.setStoreType("aliyun");
+
         fileVO.setFile(file);
         StoreService storeService = fileStorageService.getFileStorage(fileVO.getStoreType());
         FileVO result = storeService.saveFile(fileVO);
