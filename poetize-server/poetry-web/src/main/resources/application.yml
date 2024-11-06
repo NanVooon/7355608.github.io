@@ -1,15 +1,14 @@
 server:
   port: 8081
   tomcat:
-    threads.max: 50
+    threads:
+      max: 50
     max-connections: 100
     max-http-form-post-size: 120MB
     connection-timeout: 60000
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
       logic-delete-value: 1
@@ -23,8 +22,8 @@ spring:
 
   mail:
     host: smtp.qq.com
-    username:
-    password:
+    username: your-username # 请替换为真实的用户名
+    password: your-password # 请替换为真实的密码
     default-encoding: utf-8
     protocol: smtp
     port: 465
@@ -38,29 +37,37 @@ spring:
             enable: true
 
   datasource:
-    username:
-    password:
+    username: root
+    password: 123456 # 请替换为真实的密码
     url: jdbc:mysql://localhost:3306/poetize?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 user:
   code:
-    format:
+    format: your-format # 请替换为实际的格式
   subscribe:
-    format:
+    format: your-format # 请替换为实际的格式
 
 store:
-  type:
+  type: aliyun # 请替换为实际的存储类型
 
 local:
-  enable:
-  uploadUrl:
-  downloadUrl:
+  enable: false # 根据需要设置
+  uploadUrl: C:/pictures/ # 请替换为实际的上传URL
+  downloadUrl: C:/pictures/ # 请替换为实际的下载URL
 
-qiniu:
-  enable:
-  accessKey:
-  secretKey:
-  bucket:
-  downloadUrl:
+#qiniu:
+#  enable: true # 根据需要设置
+#  accessKey: your-access-key # 请替换为七牛云的AccessKey
+#  secretKey: your-secret-key # 请替换为七牛云的SecretKey
+#  bucket: your-bucket-name # 请替换为七牛云的Bucket名称
+#  downloadUrl: your-download-url # 请替换为七牛云的下载URL前缀
+
+aliyun:
+  oss:
+    enable: true
+    endpoint: oss-cn-beijing.aliyuncs.com
+    accessKeyId: LTAI5t7Uj9gnH9gmqpQn7rWb
+    accessKeySecret: mIJ54oLaKHCsZAy8EZ2ZYE3OYF4H6u
+    bucketName: poetize-lpj
